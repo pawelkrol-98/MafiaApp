@@ -1,0 +1,31 @@
+<div class="alert alert-info">
+  login: boss<br/>
+  password: 12Wasko3
+</div>
+<div class="container">
+  <div class="card card-container">
+    <h3 class="text-center">MAFIA</h3>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="login">Login</label>
+        <input type="text" formControlName="login" class="form-control" placeholder="login"
+               [ngClass]="{ 'is-invalid': submitted && f.login.errors }"/>
+        <div *ngIf="submitted && f.login.errors" class="invalid-feedback">
+          <div *ngIf="f.login.errors.required">Login is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" class="form-control" placeholder="password"
+               [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-lg btn-dark btn-block btn-login">Login</button>
+      </div>
+      <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    </form>
+  </div>
+</div>

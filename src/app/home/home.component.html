@@ -1,0 +1,32 @@
+<h1>DASHBOARD</h1>
+
+<div class="container">
+  <p class="data-header"> List of killers</p>
+  <div class="col-sm-12">
+    <table *ngIf="killers && killers.length > 0; else noKillersInfo" class="cs-table table table-striped">
+      <thead>
+      <tr>
+        <th>id</th>
+        <th>pseudonym</th>
+        <th>location</th>
+        <th>salary</th>
+        <th>target ID</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let killer of killers">
+        <td> {{killer.id }} </td>
+        <td>  {{killer.pseudonym }}  </td>
+        <td>  {{killer.location}} </td>
+        <td>  {{killer.salary}} </td>
+        <td>  {{killer.targetId}} </td>
+      </tr>
+      </tbody>
+    </table>
+    <ng-template #noKillersInfo>
+      <div class="no-killers-info">
+        <p>Currently no killers in server.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
