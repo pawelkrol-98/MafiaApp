@@ -33,7 +33,11 @@ export class AuthenticationService {
       }));
   }
 
-  logout() {
+  logout(login: string, id: number) {
+    return this.http.put<any>(`http://localhost:8443/api/user/logout`, {login, id});
+  }
+
+  endSession() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);

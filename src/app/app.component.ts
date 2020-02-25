@@ -20,7 +20,8 @@ export class AppComponent {
   }
 
   logout() {
-    this.authenticationService.logout();
+    this.authenticationService.logout(this.currentUser.login, this.currentUser.id);
     this.router.navigate(['/login']);
+    this.authenticationService.endSession();
   }
 }
