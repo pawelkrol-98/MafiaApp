@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    // reset login status
-    this.authenticationService.logout();
+    // zakoncz sesje jesli istnieje
+    this.authenticationService.endSession();
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';

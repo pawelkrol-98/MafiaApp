@@ -1,31 +1,123 @@
-<h1>DASHBOARD</h1>
-<div class="container">
-  <p class="data-header"> List of killers</p>
-  <div class="col-sm-12">
-    <table *ngIf="killers && killers.length > 0; else noKillersInfo" class="cs-table table table-striped">
-      <thead>
-      <tr>
-        <th>id</th>
-        <th>pseudonym</th>
-        <th>location</th>
-        <th>salary</th>
-        <th>target ID</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let killer of killers">
-        <td> {{killer.id }} </td>
-        <td>  {{killer.pseudonym }}  </td>
-        <td>  {{killer.location}} </td>
-        <td>  {{killer.salary}} </td>
-        <td>  {{killer.targetId}} </td>
-      </tr>
-      </tbody>
-    </table>
-    <ng-template #noKillersInfo>
-      <div class="no-killers-info">
-        <p>Currently no killers in server.</p>
+<div class="dashboard-container">
+  <div class="com-container">
+    <div class="form">
+      <button class="btn btn-dark"
+              [class.btn-light]="editable"
+              (click)="editable = !editable">
+        {{editable && 'Done' || 'Edit'}}
+      </button>
+      <button class="btn btn-light"
+              [hidden]="!editable"
+              (mouseover)="toggleHighlight(true)"
+              (mouseleave)="toggleHighlight(false)"
+              >
+        Add widget
+      </button>
+      <div class="toggle-switch"
+           [hidden]="!editable">
+        <input type="checkbox"
+               id="swapper"
+               [(ngModel)]="swapWidgets">
+        <label for="swapper">Swap Widgets</label>
       </div>
-    </ng-template>
+      <div class="toggle-switch">
+        <input type="checkbox"
+               id="grid"
+               [(ngModel)]="showGrid">
+        <label for="grid">Grid</label>
+      </div>
+      Rows: <b>{{rows}}</b>
+      <div class="btn-group">
+        <button class="btn btn-light"
+                (click)="doRows(false)">
+          -
+        </button>
+        <button class="btn btn-light"
+                (click)="doRows(true)">
+          +
+        </button>
+      </div>
+      Cols: <b>{{cols}}</b>
+      <div class="btn-group">
+        <button class="btn btn-light"
+                (click)="doCols(false)">
+          -
+        </button>
+        <button class="btn btn-light"
+                (click)="doCols(true)">
+          +
+        </button>
+      </div>
+    </div>
+    <ngx-widget-grid [rows]="rows"
+                     [columns]="cols"
+                     [highlightNextPosition]="highlightNextPosition"
+                     #grid
+                     [showGrid]="showGrid"
+                     (widgetPositionChange)="onWidgetChange($event)">
+      <ngx-widget *ngFor="let widget of widgets"
+                  [(position)]="widget.position"
+                  [movable]="editable"
+                  [resizable]="editable"
+      >
+        <div style="height:100%;width:100%; display:flex;">
+          <div style="height:100%;width:100%; padding:10px; background-color: rgb(120,119,122);">
+            <div *ngIf="widget.type == 0" class="card">
+              <div class="card-header widget-title">
+                {{widget.options.title}}
+              </div>
+              <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-striped table-sm table-dark">
+                  <thead>
+                  <tr>
+                    <th>NAME</th>
+                    <th>LAST NAME</th>
+                    <th>AGE</th>
+                    <th>DEBT</th>
+                    <th>LOCATION</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let debtor of debtors; let i = index">
+                    <td> {{debtor.name}} </td>
+                    <td> {{debtor.lastname}} </td>
+                    <td> {{debtor.age}} </td>
+                    <td> {{debtor.debt}} </td>
+                    <td> {{debtor.location}} </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              </div>
+            </div>
+
+            <div *ngIf="widget.type == 1" class="card">
+              <div class="card-header widget-title">
+                {{widget.options.title}}
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-striped table-sm table-dark">
+                    <thead>
+                    <tr>
+                      <th>PSEUDONYM</th>
+                      <th>SALARY</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let killer of killers; let i = index">
+                      <td> {{killer.pseudonym}} </td>
+                      <td> {{killer.salary}} </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ngx-widget>
+    </ngx-widget-grid>
   </div>
 </div>
