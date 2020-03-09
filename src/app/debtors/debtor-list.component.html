@@ -11,14 +11,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let debtor of debtors; let i = index">
+    <tr *ngFor="let debtor of debtors; let i = index" >
       <td> {{debtor.name}} </td>
       <td> {{debtor.lastname}} </td>
       <td> {{debtor.age}} </td>
       <td> {{debtor.debt}} </td>
       <td> {{debtor.location}} </td>
+      <td >
+        <button class="btn btn-outline-danger" (click)="deleteDebtor(debtor)">Delete</button>
+      </td>
     </tr>
     </tbody>
   </table>
-  <button class="btn btn-dark">Add debtor</button>
+  <button class="btn btn-dark" (click)="openDialog()">Add debtor</button>
 </div>

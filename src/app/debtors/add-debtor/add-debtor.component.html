@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>ADD DEBTOR</h2>
+<mat-dialog-content>
+  <form [formGroup]="debtorForm">
+    <label>Name</label>
+    <input formControlName="name" type="text" class="form-control" placeholder="name">
+    <label>Last Name</label>
+    <input formControlName="lastname" type="text" class="form-control" placeholder="last name">
+    <label>Age</label>
+    <input formControlName="age" type="text" class="form-control" placeholder="age">
+    <label>Debt</label>
+    <input formControlName="debt" type="text" class="form-control" placeholder="debt">
+    <label>Location</label>
+    <input formControlName="location" type="text" class="form-control" placeholder="location">
+  </form>
+  <button class="btn btn-dark" (click)="addDebtor()" mat-dialog-close>Add</button>
+</mat-dialog-content>

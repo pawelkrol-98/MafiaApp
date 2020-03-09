@@ -82,4 +82,11 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  saveWidgets() {
+    this.dashboardService.saveWidgets(Number(this.currentUser.id), this.widgets).subscribe(success => {
+      if (success) {
+        this.loadWidgets();
+      }
+    });
+  }
 }

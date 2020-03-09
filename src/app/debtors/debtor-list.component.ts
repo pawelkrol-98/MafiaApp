@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Debtor} from '../models';
 import {DebtorsService} from '../services';
 import {first} from 'rxjs/operators';
+import {MatDialog} from '@angular/material/dialog';
+import {AddDebtorComponent} from './add-debtor/add-debtor.component';
 
 @Component({
   selector: 'app-debtor-list',
@@ -12,7 +14,8 @@ export class DebtorListComponent implements OnInit {
 
   debtors: Debtor[] = [];
 
-  constructor(private debtorsService: DebtorsService) { }
+  constructor(private debtorsService: DebtorsService,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     this.loadDebtors();
@@ -21,6 +24,18 @@ export class DebtorListComponent implements OnInit {
   loadDebtors(): void {
     this.debtorsService.getAll().pipe(first()).subscribe(debtors => {
       this.debtors = debtors;
+    });
+  }
+
+  openDialog() {
+    this.dialog.open(AddDebtorComponent).afterClosed().subscribe(res => {
+      this.loadDebtors();
+    });
+  }
+
+  deleteDebtor(debtor: Debtor) {
+    this.debtorsService.deleteDebtor(debtor.id).subscribe(() => {
+      this.loadDebtors();
     });
   }
 }

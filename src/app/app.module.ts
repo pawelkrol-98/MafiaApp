@@ -10,7 +10,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ErrorInterceptor, JwtInterceptor} from './helpers';
 import {NgxWidgetGridModule} from 'ngx-widget-grid';
 import { DebtorListComponent } from './debtors/debtor-list.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
+import { AddDebtorComponent } from './debtors/add-debtor/add-debtor.component';
+import { MapComponent } from './map/map.component';
 
 
 @NgModule({
@@ -18,7 +21,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    DebtorListComponent
+    DebtorListComponent,
+    AddDebtorComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     ReactiveFormsModule,
     NgxWidgetGridModule,
     FormsModule,
+    NoopAnimationsModule,
     MatDialogModule
+
 ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

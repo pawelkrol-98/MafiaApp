@@ -10,8 +10,9 @@
               [hidden]="!editable"
               (mouseover)="toggleHighlight(true)"
               (mouseleave)="toggleHighlight(false)"
-              >
-        Add widget
+              (click)="saveWidgets()"
+      >
+        Save layout
       </button>
       <div class="toggle-switch"
            [hidden]="!editable">
@@ -93,7 +94,16 @@
                   </table>
                 </div>
               </div>
+            </div>
+
+            <div *ngIf="widget.type == 2" class="card">
+              <div class="card-header widget-title">
+                {{widget.options.title}}
               </div>
+              <div class="card-body embed-responsive">
+                <app-map></app-map>
+              </div>
+            </div>
           </div>
         </div>
       </ngx-widget>
