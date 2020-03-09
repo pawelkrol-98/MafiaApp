@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ErrorInterceptor, JwtInterceptor} from './helpers';
 import {NgxWidgetGridModule} from 'ngx-widget-grid';
 import { DebtorListComponent } from './debtors/debtor-list.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { DebtorListComponent } from './debtors/debtor-list.component';
     ReactiveFormsModule,
     NgxWidgetGridModule,
     FormsModule,
+    MatDialogModule
 ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
