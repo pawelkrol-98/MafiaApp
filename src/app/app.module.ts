@@ -9,13 +9,15 @@ import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ErrorInterceptor, JwtInterceptor} from './helpers';
 import {NgxWidgetGridModule} from 'ngx-widget-grid';
+import { DebtorListComponent } from './debtors/debtor-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    DebtorListComponent
   ],
   imports: [
     BrowserModule,
@@ -23,9 +25,8 @@ import {NgxWidgetGridModule} from 'ngx-widget-grid';
     HttpClientModule,
     ReactiveFormsModule,
     NgxWidgetGridModule,
-    FormsModule
-
-  ],
+    FormsModule,
+],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

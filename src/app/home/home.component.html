@@ -66,29 +66,8 @@
               <div class="card-header widget-title">
                 {{widget.options.title}}
               </div>
-              <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-striped table-sm table-dark">
-                  <thead>
-                  <tr>
-                    <th>NAME</th>
-                    <th>LAST NAME</th>
-                    <th>AGE</th>
-                    <th>DEBT</th>
-                    <th>LOCATION</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let debtor of debtors; let i = index">
-                    <td> {{debtor.name}} </td>
-                    <td> {{debtor.lastname}} </td>
-                    <td> {{debtor.age}} </td>
-                    <td> {{debtor.debt}} </td>
-                    <td> {{debtor.location}} </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
+              <div class="card-body embed-responsive">
+                <app-debtor-list></app-debtor-list>
               </div>
             </div>
 
@@ -114,7 +93,7 @@
                   </table>
                 </div>
               </div>
-            </div>
+              </div>
           </div>
         </div>
       </ngx-widget>

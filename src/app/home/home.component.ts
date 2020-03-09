@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
   }
 
   killers: Killer[] = [];
-  debtors: Debtor[] = [];
   widgets: Widget[] = [];
 
   constructor(private killerService: KillerService,
@@ -42,7 +41,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.loadWidgets();
     this.loadKillers();
-    this.loadDebtors();
   }
 
   loadWidgets(): void {
@@ -54,12 +52,6 @@ export class HomeComponent implements OnInit {
   loadKillers(): void {
     this.killerService.getAll().pipe(first()).subscribe(killers => {
       this.killers = killers;
-    });
-  }
-
-  loadDebtors(): void {
-    this.debtorService.getAll().pipe(first()).subscribe(debtors => {
-      this.debtors = debtors;
     });
   }
 
