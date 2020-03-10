@@ -8,6 +8,7 @@
       <th>DEBT</th>
       <th>LOCATION</th>
       <th>DELETE</th>
+      <th>EDIT</th>
     </tr>
     </thead>
     <tbody>
@@ -18,10 +19,13 @@
       <td> {{debtor.debt}} </td>
       <td> {{debtor.location}} </td>
       <td >
-        <button class="btn btn-outline-danger" (click)="deleteDebtor(debtor)">Delete</button>
+        <button class="btn btn-sm btn-outline-danger" (click)="deleteDebtor(debtor)">Delete</button>
+      </td>
+      <td >
+        <button class="btn btn-sm btn-outline-light" (click)="openEditDialog(debtor)">Edit</button>
       </td>
     </tr>
     </tbody>
   </table>
-  <button class="btn btn-dark" (click)="openDialog()">Add debtor</button>
+  <button class="btn btn-dark" (click)="openAddDialog()">Add debtor</button>
 </div>

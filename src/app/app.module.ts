@@ -14,6 +14,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AddDebtorComponent } from './debtors/add-debtor/add-debtor.component';
 import { MapComponent } from './map/map.component';
+import { EditDebtorComponent } from './debtors/edit-debtor/edit-debtor.component';
+import { KillersListComponent } from './killers/killers-list.component';
+import { AddKillerComponent } from './killers/add-killer/add-killer.component';
+import { EditKillerComponent } from './killers/edit-killer/edit-killer.component';
 
 
 @NgModule({
@@ -24,6 +28,10 @@ import { MapComponent } from './map/map.component';
     DebtorListComponent,
     AddDebtorComponent,
     MapComponent,
+    EditDebtorComponent,
+    KillersListComponent,
+    AddKillerComponent,
+    EditKillerComponent,
   ],
   imports: [
     BrowserModule,

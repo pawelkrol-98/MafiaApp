@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>ADD KILLER</h2>
+<mat-dialog-content>
+  <form [formGroup]="killerForm">
+    <label>Pseudonym</label>
+    <input formControlName="pseudonym" type="text" class="form-control" placeholder="pseudonym">
+    <label>Salary</label>
+    <input formControlName="salary" type="text" class="form-control" placeholder="salary">
+    <label>Location</label>
+    <input formControlName="location" type="text" class="form-control" placeholder="location">
+  </form>
+  <button class="btn btn-dark" (click)="addKiller()" mat-dialog-close>Save</button>
+</mat-dialog-content>

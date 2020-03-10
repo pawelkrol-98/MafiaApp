@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Debtor} from '../models';
 import {DebtorsService} from '../services';
 import {first} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {AddDebtorComponent} from './add-debtor/add-debtor.component';
+import {EditDebtorComponent} from './edit-debtor/edit-debtor.component';
 
 @Component({
   selector: 'app-debtor-list',
@@ -15,7 +16,8 @@ export class DebtorListComponent implements OnInit {
   debtors: Debtor[] = [];
 
   constructor(private debtorsService: DebtorsService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.loadDebtors();
@@ -27,8 +29,19 @@ export class DebtorListComponent implements OnInit {
     });
   }
 
-  openDialog() {
-    this.dialog.open(AddDebtorComponent).afterClosed().subscribe(res => {
+  openAddDialog() {
+    this.dialog.open(AddDebtorComponent).afterClosed().subscribe(() => {
+      this.loadDebtors();
+    });
+  }
+
+  openEditDialog(debtor: Debtor) {
+    this.dialog.open(EditDebtorComponent, {
+      data: {
+        id: debtor.id, name: debtor.name, lastname: debtor.lastname, age: debtor.age, debt: debtor.debt, location: debtor.location
+      }
+    })
+      .afterClosed().subscribe(() => {
       this.loadDebtors();
     });
   }
@@ -38,4 +51,5 @@ export class DebtorListComponent implements OnInit {
       this.loadDebtors();
     });
   }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {DebtorsService} from '../../services';
 
@@ -12,8 +12,8 @@ export class AddDebtorComponent implements OnInit {
   debtorForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private debtorsService: DebtorsService,
-              ) { }
+              private debtorsService: DebtorsService) {
+  }
 
   ngOnInit(): void {
     this.debtorForm = this.buildDebtorForm();

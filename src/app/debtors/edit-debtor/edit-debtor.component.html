@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>ADD DEBTOR</h2>
+<h2 mat-dialog-title>EDIT DEBTOR {{debtor.name}} {{debtor.lastname}} </h2>
 <mat-dialog-content>
-  <form [formGroup]="debtorForm">
+  <form [formGroup]="debtorEditForm">
     <label>Name</label>
     <input formControlName="name" type="text" class="form-control" placeholder="name">
     <label>Last Name</label>
@@ -12,5 +12,5 @@
     <label>Location</label>
     <input formControlName="location" type="text" class="form-control" placeholder="location">
   </form>
-  <button class="btn btn-dark" (click)="addDebtor()" mat-dialog-close>Save</button>
+  <button class="btn btn-dark" (click)="updateDebtor(data.id)" mat-dialog-close>Update</button>
 </mat-dialog-content>

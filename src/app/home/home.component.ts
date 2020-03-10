@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
     return this.isEditable;
   }
 
-  killers: Killer[] = [];
   widgets: Widget[] = [];
 
   constructor(private killerService: KillerService,
@@ -40,18 +39,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loadWidgets();
-    this.loadKillers();
   }
 
   loadWidgets(): void {
     this.dashboardService.getWidgets(this.currentUser.id).subscribe(widgets => {
       this.widgets = widgets;
-    });
-  }
-
-  loadKillers(): void {
-    this.killerService.getAll().pipe(first()).subscribe(killers => {
-      this.killers = killers;
     });
   }
 
