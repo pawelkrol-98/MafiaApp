@@ -73,24 +73,21 @@
               </div>
 
 
+              <div *ngIf="widget.type == 1" class="card">
+                <div class="card-header widget-title">
+                  {{widget.options.title}}
+                </div>
+                <div class="card-body embed-responsive">
+                  <app-killers-list></app-killers-list>
+                </div>
+              </div>
+            </div>
 
-            <div *ngIf="widget.type == 1" class="card">
+            <div *ngIf="widget.type == 2">
               <div class="card-header widget-title">
                 {{widget.options.title}}
               </div>
-              <div class="card-body embed-responsive">
-                <app-killers-list></app-killers-list>
-              </div>
-            </div>
-            </div>
-
-            <div *ngIf="widget.type == 2" class="card">
-              <div class="card-header widget-title">
-                {{widget.options.title}}
-              </div>
-              <div class="card-body embed-responsive">
                 <app-map></app-map>
-              </div>
             </div>
 
           </div>
