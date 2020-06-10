@@ -29,6 +29,8 @@ export class HomeComponent implements OnInit {
   }
 
   widgets: Widget[] = [];
+  killers: Killer[] = [];
+  debtors: Debtor[] = [];
 
   constructor(private killerService: KillerService,
               private debtorService: DebtorsService,
@@ -39,6 +41,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loadWidgets();
+    this.loadKillers();
+    this.loadDebtors();
   }
 
   loadWidgets(): void {
@@ -47,9 +51,19 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  toggleHighlight(doHighlight: boolean) {
-    this.highlightNextPosition = !!doHighlight;
+  loadKillers() {
+    this.killerService.getAll().subscribe(
+      killers => this.killers = killers);
   }
+
+  loadDebtors() {
+    this.debtorService.getAll().subscribe(
+      debtors => this.debtors = debtors);
+  }
+  // podświetl miejsce kolejnego widgeta
+  /*toggleHighlight(doHighlight: boolean) {
+    this.highlightNextPosition = !!doHighlight;
+  }*/
 
   onWidgetChange(event: WidgetPositionChange) {
   }

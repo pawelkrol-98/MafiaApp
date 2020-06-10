@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "Mafia"
+  "defaultProject": "Mafia",
+  "cli": {
+    "analytics": false
+  }
 }
