@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Debtor} from '../models';
 import {DebtorsService} from '../services';
 import {first} from 'rxjs/operators';
@@ -11,7 +11,7 @@ import {EditDebtorComponent} from './edit-debtor/edit-debtor.component';
   templateUrl: './debtor-list.component.html',
   styleUrls: ['./debtor-list.component.less']
 })
-export class DebtorListComponent implements OnInit {
+export class DebtorListComponent implements OnInit, OnChanges {
 
   debtors: Debtor[] = [];
 
@@ -20,6 +20,10 @@ export class DebtorListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadDebtors();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.loadDebtors();
   }
 

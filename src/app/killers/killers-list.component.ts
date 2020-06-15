@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Killer} from '../models';
 import {KillerService} from '../services';
 import {first} from 'rxjs/operators';
-import {AddDebtorComponent} from '../debtors/add-debtor/add-debtor.component';
 import {MatDialog} from '@angular/material/dialog';
 import {AddKillerComponent} from './add-killer/add-killer.component';
 import {EditKillerComponent} from './edit-killer/edit-killer.component';
+import {SetTargetComponent} from './set-target/set-target.component';
 
 @Component({
   selector: 'app-killers-list',
@@ -48,6 +48,15 @@ export class KillersListComponent implements OnInit {
 
   deleteKiller(killer: Killer) {
     this.killerService.deleteKiller(killer.id).subscribe(() => {
+      this.loadKillers();
+    });
+  }
+
+  openTargetDialog(killer: Killer) {
+    this.dialog.open(SetTargetComponent, {
+      width: '400px',
+      data: {id: killer.id, targetID: killer.targetId}
+    }).afterClosed().subscribe(() => {
       this.loadKillers();
     });
   }

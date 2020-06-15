@@ -1,22 +1,30 @@
 <div class="table-responsive">
-  <table class="table table-striped table-sm table-dark">
+  <table class="table table-striped table-sm table-dark mydatadable">
     <thead>
     <tr>
       <th>PSEUDONYM</th>
       <th>SALARY</th>
+      <th>TARGET</th>
+      <th>id</th>
       <th>DELETE</th>
       <th>EDIT</th>
+      <th>TARGET</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let killer of killers; let i = index">
       <td> {{killer.pseudonym}} </td>
       <td> {{killer.salary}} </td>
+      <td> {{killer.targetId}} </td>
+      <td> {{killer.id}} </td>
       <td >
         <button class="btn btn-sm btn-outline-danger" (click)="deleteKiller(killer)" >Delete</button>
       </td>
       <td >
         <button class="btn btn-sm btn-outline-light" (click)="openEditDialog(killer)" >Edit</button>
+      </td>
+      <td>
+        <button class="btn btn-sm btn-outline-light" (click)="openTargetDialog(killer)" >Set Target</button>
       </td>
     </tr>
     </tbody>

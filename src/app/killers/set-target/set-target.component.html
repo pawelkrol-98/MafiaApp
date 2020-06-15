@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Select debtor for killer{{data.id}}</h1>
+
+<div class="example-table-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let debtor"> {{debtor.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell *matHeaderCellDef> Last Name </th>
+      <td mat-cell *matCellDef="let debtor"> {{debtor.lastname}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef> Age </th>
+      <td mat-cell *matCellDef="let debtor"> {{debtor.age}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="debt">
+      <th mat-header-cell *matHeaderCellDef> Debt </th>
+      <td mat-cell *matCellDef="let debtor"> {{debtor.debt}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef> Select </th>
+      <td mat-cell *matCellDef="let debtor, let killer"><button
+        *ngIf="data.targetID != debtor.id; else cancel" class="btn btn-sm btn-outline-dark" (click)="setTarget(data.id, debtor.id)">Set
+      </button>
+        <ng-template #cancel>
+          <button class="btn btn-sm btn-outline-danger" (click)="cancelTarget(data.id)">Cancel</button>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<div mat-dialog-actions>
+  <button class="btn btn-sm btn-dark" (click)="onNoClick()">Close</button>
+</div>

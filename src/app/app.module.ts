@@ -18,6 +18,9 @@ import { EditDebtorComponent } from './debtors/edit-debtor/edit-debtor.component
 import { KillersListComponent } from './killers/killers-list.component';
 import { AddKillerComponent } from './killers/add-killer/add-killer.component';
 import { EditKillerComponent } from './killers/edit-killer/edit-killer.component';
+import { SetTargetComponent } from './killers/set-target/set-target.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -32,6 +35,7 @@ import { EditKillerComponent } from './killers/edit-killer/edit-killer.component
     KillersListComponent,
     AddKillerComponent,
     EditKillerComponent,
+    SetTargetComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,9 +45,11 @@ import { EditKillerComponent } from './killers/edit-killer/edit-killer.component
     NgxWidgetGridModule,
     FormsModule,
     NoopAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatButtonModule
 
-],
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
