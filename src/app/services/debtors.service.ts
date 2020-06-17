@@ -38,6 +38,15 @@ export class DebtorsService {
     );
   }
 
+  public cancelOrder(id: number): Observable<boolean> {
+    return this.http.delete<string>(`http://localhost:8443/api/debtors/cancel-task/${id} `).pipe(
+      mapTo(true),
+      catchError(error => {
+        alert(error.error);
+        return of(false);
+      }));
+  }
+
   private handleError(error: any) {
     if (error instanceof HttpErrorResponse) {
       alert(`${error.message}`);

@@ -5,6 +5,7 @@ import {first} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {AddDebtorComponent} from './add-debtor/add-debtor.component';
 import {EditDebtorComponent} from './edit-debtor/edit-debtor.component';
+import {ForgiveComponent} from './forgive/forgive.component';
 
 @Component({
   selector: 'app-debtor-list',
@@ -56,4 +57,14 @@ export class DebtorListComponent implements OnInit, OnChanges {
     });
   }
 
+  openForgiveDialog(debtor: Debtor) {
+    this.dialog.open(ForgiveComponent, {
+      data: {
+        id: debtor.id, name: debtor.name, lastname: debtor.lastname
+      }
+    })
+      .afterClosed().subscribe(() => {
+        this.loadDebtors();
+    });
+  }
 }

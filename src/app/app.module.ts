@@ -21,6 +21,7 @@ import { EditKillerComponent } from './killers/edit-killer/edit-killer.component
 import { SetTargetComponent } from './killers/set-target/set-target.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
+import { ForgiveComponent } from './debtors/forgive/forgive.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {MatButtonModule} from '@angular/material/button';
     AddKillerComponent,
     EditKillerComponent,
     SetTargetComponent,
+    ForgiveComponent,
   ],
   imports: [
     BrowserModule,

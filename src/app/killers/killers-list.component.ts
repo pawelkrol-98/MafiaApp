@@ -58,6 +58,7 @@ export class KillersListComponent implements OnInit {
       data: {id: killer.id, targetID: killer.targetId}
     }).afterClosed().subscribe(() => {
       this.loadKillers();
+      window.location.reload();
     });
   }
 }

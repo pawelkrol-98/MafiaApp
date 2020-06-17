@@ -10,6 +10,7 @@
       <th>TARGET</th>
       <th>DELETE</th>
       <th>EDIT</th>
+      <th>CANCEL ORDER</th>
     </tr>
     </thead>
     <tbody>
@@ -25,6 +26,9 @@
       </td>
       <td >
         <button class="btn btn-sm btn-outline-light" (click)="openEditDialog(debtor)">Edit</button>
+      </td>
+      <td>
+        <button [disabled]="!debtor.isTarget" class="btn btn-sm btn-outline-light" (click)="openForgiveDialog(debtor)">Cancel</button>
       </td>
     </tr>
     </tbody>

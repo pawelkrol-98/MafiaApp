@@ -1,0 +1,5 @@
+<h2>Are you sure you want to cancel this order on {{data.name}} {{data.lastname}}?</h2>
+<div class="confirm" mat-dialog-actions>
+  <button class="customBtn" class="btn btn-dark" (click)="cancelOrder(data.id)">Yes, Cancel Order</button>
+  <button class="customBtn" class="btn btn-danger" (click)="close()">No, Close</button>
+</div>
