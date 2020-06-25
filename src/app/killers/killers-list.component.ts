@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {Killer} from '../models';
 import {KillerService} from '../services';
 import {first} from 'rxjs/operators';
@@ -6,6 +6,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {AddKillerComponent} from './add-killer/add-killer.component';
 import {EditKillerComponent} from './edit-killer/edit-killer.component';
 import {SetTargetComponent} from './set-target/set-target.component';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-killers-list',
@@ -15,6 +17,11 @@ import {SetTargetComponent} from './set-target/set-target.component';
 export class KillersListComponent implements OnInit {
 
   killers: Killer[] = [];
+  dataSource = new MatTableDataSource(this.killers);
+  displayedColumns = ['pseudonym', 'salary', 'delete', 'edit', 'target', 'location'];
+
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @Output() locateKiller = new EventEmitter();
 
   constructor(private killerService: KillerService,
               public dialog: MatDialog) {
@@ -22,11 +29,13 @@ export class KillersListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadKillers();
+    this.dataSource.sort = this.sort;
   }
 
   loadKillers(): void {
     this.killerService.getAll().pipe(first()).subscribe(killers => {
       this.killers = killers;
+      this.dataSource.data = this.killers;
     });
   }
 
@@ -55,10 +64,14 @@ export class KillersListComponent implements OnInit {
   openTargetDialog(killer: Killer) {
     this.dialog.open(SetTargetComponent, {
       width: '400px',
-      data: {id: killer.id, targetID: killer.targetId}
+      data: {id: killer.id, targetID: killer.targetId, name: killer.pseudonym}
     }).afterClosed().subscribe(() => {
       this.loadKillers();
-      window.location.reload();
     });
   }
+
+  locate(killer: Killer) {
+    this.locateKiller.emit(killer);
+  }
+
 }

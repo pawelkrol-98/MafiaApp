@@ -31,6 +31,8 @@ export class HomeComponent implements OnInit {
   widgets: Widget[] = [];
   killers: Killer[] = [];
   debtors: Debtor[] = [];
+  locateKiller: Killer;
+  locateDebtor: Debtor;
 
   constructor(private killerService: KillerService,
               private debtorService: DebtorsService,
@@ -95,5 +97,13 @@ export class HomeComponent implements OnInit {
         window.location.reload();
       }
     });
+  }
+
+  killerLocations(killer: Killer) {
+    this.locateKiller = killer;
+  }
+
+  debtorLocations(debtor: Debtor) {
+    this.locateDebtor = debtor;
   }
 }

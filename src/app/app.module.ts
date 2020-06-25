@@ -22,6 +22,7 @@ import { SetTargetComponent } from './killers/set-target/set-target.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import { ForgiveComponent } from './debtors/forgive/forgive.component';
+import {MatSortModule} from '@angular/material/sort';
 
 
 @NgModule({
@@ -49,8 +50,8 @@ import { ForgiveComponent } from './debtors/forgive/forgive.component';
     NoopAnimationsModule,
     MatDialogModule,
     MatTableModule,
-    MatButtonModule
-
+    MatButtonModule,
+    MatSortModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

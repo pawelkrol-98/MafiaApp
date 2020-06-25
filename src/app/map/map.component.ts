@@ -1,4 +1,4 @@
-import {Component, OnInit, OnChanges, Input, } from '@angular/core';
+import {Component, OnInit, OnChanges, Input} from '@angular/core';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
@@ -7,7 +7,6 @@ import {fromLonLat} from 'ol/proj';
 import MousePosition from 'ol/control/MousePosition';
 import {createStringXY} from 'ol/coordinate';
 import {defaults as defaultControls} from 'ol/control';
-import Layer from 'ol/layer/Layer';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import Feature from 'ol/Feature';
@@ -25,31 +24,39 @@ import Icon from 'ol/style/Icon';
 export class MapComponent implements OnInit, OnChanges {
   map: Map;
   mousePosition: MousePosition;
-  layer: Layer;
+  view = new View ({
+    center: fromLonLat([19.17, 52.12]),
+    zoom: 6
+  });
 
   @Input() killers: Killer [];
   @Input() debtors: Debtor [];
+  @Input() locateKiller: Killer;
+  @Input() locateDebtor: Debtor;
 
   constructor() {
   }
   ngOnInit() {
     this.getMousePosition();
     this.getMap();
-    this.getLayer();
   }
 
   ngOnChanges() {
+    if (this.map) {
+      this.map.updateSize();
+    }
     if (this.map && this.killers) {
       this.addKillerLocations();
     }
     if (this.map && this.debtors) {
       this.addDebtorLocations();
     }
-  }
-
-  // tslint:disable-next-line:use-lifecycle-interface
-  ngDoCheck() {
-    this.map.updateSize();
+    if (this.locateKiller) {
+      this.locateKillers(this.locateKiller);
+    }
+    if (this.locateDebtor) {
+      this.locateDebtors(this.locateDebtor);
+    }
   }
 
   getMap() {
@@ -61,10 +68,7 @@ export class MapComponent implements OnInit, OnChanges {
           source: new OSM()
         })
       ],
-      view: new View({
-        center: fromLonLat([19.17, 52.12]),
-        zoom: 6.3
-      })
+      view: this.view
     });
   }
 
@@ -121,16 +125,19 @@ export class MapComponent implements OnInit, OnChanges {
     );
   }
 
-  getLayer() {
-    this.layer = new VectorLayer({
-      source: new VectorSource({
-        features: [
-          new Feature({
-            geometry: new Point(fromLonLat([17.088692, 51.097549]))
-          }),
-        ]
-      })
+  locateKillers(killer: Killer) {
+    this.view.animate({
+      center: fromLonLat(this.getKillersLocation(killer)),
+      duration: 2000,
+      zoom: 13
     });
-    this.map.addLayer(this.layer);
+  }
+
+  locateDebtors(debtor: Debtor) {
+    this.view.animate({
+      center: fromLonLat(this.getDebtorsLocation(debtor)),
+      duration: 2000,
+      zoom: 13
+    });
   }
 }

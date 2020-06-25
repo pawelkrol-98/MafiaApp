@@ -68,7 +68,7 @@
                   {{widget.options.title}}
                 </div>
                 <div class="card-body embed-responsive">
-                  <app-debtor-list></app-debtor-list>
+                  <app-debtor-list (locateDebtor)="debtorLocations($event)"></app-debtor-list>
                 </div>
               </div>
 
@@ -78,7 +78,7 @@
                   {{widget.options.title}}
                 </div>
                 <div class="card-body embed-responsive">
-                  <app-killers-list></app-killers-list>
+                  <app-killers-list (locateKiller)="killerLocations($event)"></app-killers-list>
                 </div>
               </div>
             </div>
@@ -87,7 +87,8 @@
               <div class="card-header widget-title">
                 {{widget.options.title}}
               </div>
-                <app-map [killers]="killers" [debtors]="debtors"></app-map>
+                <app-map [killers]="killers" [debtors]="debtors" [locateKiller]="locateKiller"
+                         [locateDebtor]="locateDebtor"></app-map>
             </div>
 
           </div>

@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>EDIT DEBTOR {{debtor.name}} {{debtor.lastname}} </h2>
+<h2 mat-dialog-title>Edit debtor {{debtor.name | uppercase}} {{debtor.lastname | uppercase}} </h2>
 <mat-dialog-content>
   <form [formGroup]="debtorEditForm">
     <label>Name</label>

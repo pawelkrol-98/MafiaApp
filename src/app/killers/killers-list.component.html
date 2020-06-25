@@ -1,33 +1,48 @@
-<div class="table-responsive">
-  <table class="table table-striped table-sm table-dark mydatadable">
-    <thead>
-    <tr>
-      <th>PSEUDONYM</th>
-      <th>SALARY</th>
-      <th>TARGET</th>
-      <th>id</th>
-      <th>DELETE</th>
-      <th>EDIT</th>
-      <th>TARGET</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let killer of killers; let i = index">
-      <td> {{killer.pseudonym}} </td>
-      <td> {{killer.salary}} </td>
-      <td> {{killer.targetId}} </td>
-      <td> {{killer.id}} </td>
-      <td >
-        <button class="btn btn-sm btn-outline-danger" (click)="deleteKiller(killer)" >Delete</button>
-      </td>
-      <td >
-        <button class="btn btn-sm btn-outline-light" (click)="openEditDialog(killer)" >Edit</button>
-      </td>
-      <td>
-        <button class="btn btn-sm btn-outline-light" (click)="openTargetDialog(killer)" >Set Target</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+<div class="add-button">
   <button class="btn btn-dark" (click)="openAddDialog()" >Add killer</button>
 </div>
+
+<div class="example-container">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="pseudonym">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Pseudonym </th>
+      <td mat-cell *matCellDef="let killer"> {{killer.pseudonym}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="salary">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Salary </th>
+      <td mat-cell *matCellDef="let killer"> {{killer.salary}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let killer"><button class="btn btn-sm btn-outline-danger"
+                                                    (click)="deleteKiller(killer)">Delete</button> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> Edit </th>
+      <td mat-cell *matCellDef="let killer"><button class="btn btn-sm btn-outline-light"
+                                                    (click)="openEditDialog(killer)">Edit</button> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="target">
+      <th mat-header-cell *matHeaderCellDef> Target </th>
+      <td mat-cell *matCellDef="let killer"><button class="btn btn-sm btn-outline-light"
+                                                    (click)="openTargetDialog(killer)">Set target</button> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef> Location </th>
+      <td mat-cell *matCellDef="let killer"><button class="btn btn-sm btn-outline-light"
+                                                    (click)="locate(killer)">Locate</button> </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</div>
+
+

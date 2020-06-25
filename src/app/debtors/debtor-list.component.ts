@@ -1,11 +1,13 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Debtor} from '../models';
+import {Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {Debtor, Killer} from '../models';
 import {DebtorsService} from '../services';
 import {first} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {AddDebtorComponent} from './add-debtor/add-debtor.component';
 import {EditDebtorComponent} from './edit-debtor/edit-debtor.component';
 import {ForgiveComponent} from './forgive/forgive.component';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-debtor-list',
@@ -15,6 +17,11 @@ import {ForgiveComponent} from './forgive/forgive.component';
 export class DebtorListComponent implements OnInit, OnChanges {
 
   debtors: Debtor[] = [];
+  dataSource = new MatTableDataSource(this.debtors);
+  displayedColumns = ['name', 'lastname', 'age', 'debt', 'delete', 'edit', 'cancel order', 'location'];
+
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @Output() locateDebtor = new EventEmitter();
 
   constructor(private debtorsService: DebtorsService,
               public dialog: MatDialog) {
@@ -22,6 +29,7 @@ export class DebtorListComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.loadDebtors();
+    this.dataSource.sort = this.sort;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -31,6 +39,7 @@ export class DebtorListComponent implements OnInit, OnChanges {
   loadDebtors(): void {
     this.debtorsService.getAll().pipe(first()).subscribe(debtors => {
       this.debtors = debtors;
+      this.dataSource.data = this.debtors;
     });
   }
 
@@ -66,5 +75,9 @@ export class DebtorListComponent implements OnInit, OnChanges {
       .afterClosed().subscribe(() => {
         this.loadDebtors();
     });
+  }
+
+  locate(debtor: Debtor) {
+    this.locateDebtor.emit(debtor);
   }
 }
