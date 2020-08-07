@@ -6,25 +6,22 @@
               (click)="editable = !editable">
         {{editable && 'Done' || 'Edit'}}
       </button>
+
       <button class="btn btn-light"
               [hidden]="!editable"
               (click)="saveWidgets()"
       >
         Save layout
       </button>
-      <div class="toggle-switch"
-           [hidden]="!editable">
-        <input type="checkbox"
-               id="swapper"
-               [(ngModel)]="swapWidgets">
-        <label for="swapper">Swap Widgets</label>
-      </div>
+
       <div class="toggle-switch">
         <input type="checkbox"
                id="grid"
                [(ngModel)]="showGrid">
         <label for="grid">Grid</label>
       </div>
+
+    <div [hidden]="!editable">
       Rows: <b>{{rows}}</b>
       <div class="btn-group">
         <button class="btn btn-light"
@@ -36,6 +33,7 @@
           +
         </button>
       </div>
+
       Cols: <b>{{cols}}</b>
       <div class="btn-group">
         <button class="btn btn-light"
@@ -47,6 +45,7 @@
           +
         </button>
       </div>
+    </div>
     </div>
 
     <ngx-widget-grid [rows]="rows"
@@ -90,7 +89,6 @@
                 <app-map [killers]="killers" [debtors]="debtors" [locateKiller]="locateKiller"
                          [locateDebtor]="locateDebtor"></app-map>
             </div>
-
           </div>
         </div>
       </ngx-widget>

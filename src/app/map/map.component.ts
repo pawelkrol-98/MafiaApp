@@ -14,6 +14,7 @@ import Point from 'ol/geom/Point';
 import {Debtor, Killer} from '../models';
 import Style from 'ol/style/Style';
 import Icon from 'ol/style/Icon';
+import {transform} from 'ol/proj';
 
 // tslint:disable-next-line:no-conflicting-lifecycle
 @Component({
@@ -24,6 +25,7 @@ import Icon from 'ol/style/Icon';
 export class MapComponent implements OnInit, OnChanges {
   map: Map;
   mousePosition: MousePosition;
+  mouseCoordinates: string;
   view = new View ({
     center: fromLonLat([19.17, 52.12]),
     zoom: 6
@@ -39,6 +41,7 @@ export class MapComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.getMousePosition();
     this.getMap();
+    this.getPosition();
   }
 
   ngOnChanges() {
@@ -53,6 +56,7 @@ export class MapComponent implements OnInit, OnChanges {
     }
     if (this.locateKiller) {
       this.locateKillers(this.locateKiller);
+      console.log(this.mouseCoordinates);
     }
     if (this.locateDebtor) {
       this.locateDebtors(this.locateDebtor);
@@ -74,7 +78,7 @@ export class MapComponent implements OnInit, OnChanges {
 
   getMousePosition() {
     this.mousePosition = new MousePosition({
-      coordinateFormat: createStringXY(6),
+      coordinateFormat: createStringXY(4),
       projection: 'EPSG:4326',
       undefinedHTML: '&nbsp;'
     });
@@ -132,7 +136,7 @@ export class MapComponent implements OnInit, OnChanges {
       zoom: 13
     });
   }
-
+  // zlokalizowanie dłużnika
   locateDebtors(debtor: Debtor) {
     this.view.animate({
       center: fromLonLat(this.getDebtorsLocation(debtor)),
@@ -140,4 +144,17 @@ export class MapComponent implements OnInit, OnChanges {
       zoom: 13
     });
   }
+  // pobieranie pozycji z eventu kliknięcia myszką na mapie. Pobranie współrzędnych tego eventu oraz przekazanie ich do
+  // zmiennej lokalnej.
+  getPosition() {
+    // tslint:disable-next-line:only-arrow-functions
+    this.map.on('singleclick', function(evt) {
+      console.log(evt.coordinate);
+      const lonlat = transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
+      console.log(lonlat);
+      this.mouseCoordinates = lonlat;
+      console.log(this.mouseCoordinates);
+  });
+  }
 }
+

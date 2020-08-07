@@ -8,5 +8,10 @@
     <label>Location</label>
     <input formControlName="location" type="text" class="form-control" placeholder="location">
   </form>
-  <button class="btn btn-dark" (click)="addKiller()" mat-dialog-close>Save</button>
+  <div class="location-button">
+    <button class="btn btn-dark" >Choose location</button>
+  </div>
+  <div class="save-button">
+    <button class="btn btn-dark" (click)="addKiller()" mat-dialog-close>Save</button>
+  </div>
 </mat-dialog-content>
