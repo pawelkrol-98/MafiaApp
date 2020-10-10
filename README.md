@@ -1,6 +1,8 @@
 # Mafia App
-Full detailed app documentation with screenshots: https://github.com/pawelkrol-98/MafiaApp/blob/master/Mafia%20App%20documentation..pdf
+# Full detailed app documentation with screenshots: https://github.com/pawelkrol-98/MafiaApp/blob/master/Mafia%20App%20documentation..pdf
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.24.
+
 Server repository: https://github.com/dzik1331/mafia-server
 
 ## Development server
